@@ -19,12 +19,20 @@ public class CarService {
         return carRepository.findAll();
     }
 
-    public Optional<Cars> findCarByCarModel(String carsDetails){
-        return carRepository.findCarByCarModel(carsDetails);
+    public Optional<Cars> findCarByCarModel(String carModels){
+        return carRepository.findCarByCarModel(carModels);
     }
 
-    @Transactional
+
     public Cars createCarData(Cars cars){
         return carRepository.save(cars);
+    }
+
+    public void deleteCarById(Long id){
+        carRepository.deleteById(id);
+    }
+
+    public void deleteAllCarDetails(){
+        carRepository.deleteAll();
     }
 }
