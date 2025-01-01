@@ -11,11 +11,11 @@ public class Cars {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "car_model")
-    private String carModel;
-
     @Column(name = "car_company")
     private String carCompany;
+
+    @Column(name = "car_model")
+    private String carModel;
 
     @Column(name = "company_establishment")
     private String companyEstablishment;
@@ -25,8 +25,8 @@ public class Cars {
 
     public Cars(Long id, String carModel, String carCompany, String companyEstablishment, String carDetails) {
         this.id = id;
-        this.carModel = carModel;
         this.carCompany = carCompany;
+        this.carModel = carModel;
         this.companyEstablishment = companyEstablishment;
         this.carDetails = carDetails;
     }
