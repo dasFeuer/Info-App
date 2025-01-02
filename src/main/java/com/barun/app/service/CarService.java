@@ -1,6 +1,5 @@
 package com.barun.app.service;
 
-import com.barun.app.dto.UpdateCarDto;
 import com.barun.app.entity.Cars;
 import com.barun.app.repo.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +29,37 @@ public class CarService {
         return carRepository.save(cars);
     }
 
-    // Need some changes to make it work properly
-//    public Cars updateCarData(Long id, UpdateCarDto cars){
-//        Cars car = carRepository.updateCar(id, cars);
-//       car.setCarCompany(cars.getCarCompany());
-//       car.setCarModel(cars.getCarModel());
-//       car.setCompanyEstablishment(cars.getCompanyEstablishment());
-//       car.setCarDetails(cars.getCarDetails());
-//        return carRepository.save(car);
-//    }
+    public Cars updateCarData(Long id, Cars cars){
+        Cars car = carRepository.findById(id)
+                .orElseThrow();
+       car.setCarCompany(cars.getCarCompany());
+       car.setCarModel(cars.getCarModel());
+       car.setCompanyEstablishment(cars.getCompanyEstablishment());
+       car.setCarDetails(cars.getCarDetails());
+        return carRepository.save(car);
+    }
+
+    // Only update fields that are present in the request
+    public Cars patchCarData(Long id, Cars updates){
+        Cars existingCar = carRepository.findById(id)
+                .orElseThrow();
+
+        if(updates.getCarCompany() != null){
+            existingCar.setCarCompany(updates.getCarCompany());
+        }
+        if(updates.getCarModel() != null){
+            existingCar.setCarModel(updates.getCarModel());
+        }
+        if(updates.getCompanyEstablishment() != null){
+            existingCar.setCompanyEstablishment(updates.getCompanyEstablishment());
+        }
+        if(updates.getCarDetails() != null){
+            existingCar.setCarDetails(updates.getCarDetails());
+        }
+        return carRepository.save(existingCar);
+    }
+
+
 
     public void deleteCarById(Long id){
         carRepository.deleteById(id);

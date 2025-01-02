@@ -1,9 +1,9 @@
 package com.barun.app.controller;
 
 import com.barun.app.dto.CarDto;
-import com.barun.app.dto.UpdateCarDto;
 import com.barun.app.entity.Cars;
 import com.barun.app.service.CarService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +29,21 @@ public class CarController {
         return ResponseEntity.ok(savedCars);
     }
 
-    // Need some changes to make it work properly
-//    @PutMapping("/updateCar")
-//    public ResponseEntity<Cars> updateCarDetails(
-//            @PathVariable Long id, @RequestBody UpdateCarDto updateCarDto){
-//        Cars updatedCar = carService.updateCarData(id, updateCarDto);
-//        return ResponseEntity.ok(updatedCar);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Cars> updateCarDetails(
+            @PathVariable Long id, @Valid @RequestBody Cars cars){
+        Cars updatedCar = carService.updateCarData(id, cars);
+        return ResponseEntity.ok(updatedCar);
+    }
+
+    // The PATCH endpoint should be used when we want to update only specific fields.
+    @PatchMapping("/{id}")
+    public ResponseEntity<Cars> patchCarDetails(
+            @PathVariable Long id, @RequestBody Cars updates){
+        Cars patchedCar = carService.patchCarData(id, updates);
+        return ResponseEntity.ok(patchedCar);
+    }
+
 
     @PostMapping("/carModel")
     public Optional<Cars> findCarByCarModel (@RequestBody CarDto carDto){
