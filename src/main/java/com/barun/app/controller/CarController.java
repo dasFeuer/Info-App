@@ -52,10 +52,10 @@ public class CarController {
     }
 
     @GetMapping("/{carCompany}")
-    public ResponseEntity<Cars> getCarByCarCompany(
+    public ResponseEntity<List<Cars>> getCarByCarCompany(
             @PathVariable("carCompany")
             String companyName) {
-        Cars carCompany = carService.findCarByCarCompany(companyName);
+        List<Cars> carCompany = carService.findCarsByCarCompany(companyName);
         return ResponseEntity.ok(carCompany);
     }
 

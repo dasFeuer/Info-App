@@ -21,8 +21,8 @@ public class CarService {
         return carRepository.findCarByCarModel(carModels);
     }
 
-    public Cars findCarByCarCompany(String carCompany){
-        return carRepository.findCarByCarCompany(carCompany);
+    public List <Cars> findCarsByCarCompany(String carCompany){
+        return carRepository.findCarsByCarCompany(carCompany);
     }
 
     public Cars createCarData(Cars cars){
