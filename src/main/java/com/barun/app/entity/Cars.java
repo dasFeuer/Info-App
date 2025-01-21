@@ -1,7 +1,6 @@
 package com.barun.app.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
 @Table(name = "cars")
